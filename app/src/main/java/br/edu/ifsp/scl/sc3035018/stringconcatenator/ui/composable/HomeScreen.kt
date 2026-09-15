@@ -19,11 +19,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeScreen(newWord: String, modifier: Modifier) {
+fun HomeScreen(newWord: String, modifier: Modifier, onAddWordClick: (String) -> Unit) {
     var currentPhrase by rememberSaveable { mutableStateOf("") }
 
     LaunchedEffect(newWord) {
-        if (newWord.isEmpty()) {
+        if (newWord.isNotEmpty()) {
             currentPhrase = if (currentPhrase.isEmpty()) {
                 newWord
             } else {
@@ -41,15 +41,14 @@ fun HomeScreen(newWord: String, modifier: Modifier) {
             modifier = Modifier.fillMaxWidth().padding(15.dp)
         )
         Button(
-            onClick = {},
+            onClick = { onAddWordClick(currentPhrase) },
             modifier = Modifier.fillMaxWidth().padding(15.dp, 0.dp)
         ) {
             Text("Adicionar Palavra")
         }
         OutlinedButton (
-            onClick = {},
+            onClick = { currentPhrase = "" },
             modifier = Modifier.fillMaxWidth().padding(15.dp, 0.dp),
-
         ) {
             Text("Reiniciar")
         }
@@ -59,5 +58,5 @@ fun HomeScreen(newWord: String, modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(newWord = "", modifier = Modifier)
+    HomeScreen(newWord = "", modifier = Modifier, onAddWordClick = {})
 }

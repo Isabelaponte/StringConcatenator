@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AddWordScreen(currentPhrase: String, modifier: Modifier) {
+fun AddWordScreen(currentPhrase: String, modifier: Modifier, onConcatClick: (String) -> Unit) {
     var newWord by remember { mutableStateOf("") }
 
     Column(modifier = modifier.fillMaxWidth().padding(0.dp, 20.dp)) {
@@ -36,7 +36,7 @@ fun AddWordScreen(currentPhrase: String, modifier: Modifier) {
             modifier = Modifier.fillMaxWidth().padding(15.dp)
         )
         Button (
-            onClick = {},
+            onClick = { onConcatClick(newWord) },
             modifier = Modifier.fillMaxWidth().padding(15.dp, 0.dp),
         ) {
             Text("Concatenar")
@@ -47,5 +47,5 @@ fun AddWordScreen(currentPhrase: String, modifier: Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AddWordScreenPreview() {
-    AddWordScreen(currentPhrase = "Abacate", modifier = Modifier)
+    AddWordScreen(currentPhrase = "Abacate", modifier = Modifier, onConcatClick = {})
 }
